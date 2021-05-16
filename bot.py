@@ -1,6 +1,6 @@
 from pyrogram import Client, filters
 
-from pyrogram.types import  InlineKeyboardButton, InlineKeyboardMarkup, Message
+from pyrogram.types import CallbackQuery, ChatPermissions, InlineKeyboardButton, InlineKeyboardMarkup, Message
 from pyrogram.errors.exceptions.bad_request_400 import UserNotParticipant
 from pytube import YouTube
 from pytube.exceptions import VideoUnavailable
@@ -10,6 +10,8 @@ import os
 TOKEN = os.environ.get("TOKEN","")
 API_ID =int(os.environ.get("API_ID",12345))
 API_HASH =os.environ.get("API_HASH","")
+CHANNEL = os.environ.get("CHANNEL","")
+
 
 
 app= Client("Thumbot",bot_token=TOKEN,api_hash=API_HASH,
@@ -28,12 +30,12 @@ def start(client, message):
 
 @app.on_message(filters.regex("^https?:\/\/?(www\.)?(youtube\.com\/watch\?v=|youtu\.be\/).{11}"))
 def gyt(client,message):
-      update_channel = "My_Test_Botz"
-      user_id = message.from_user.id
-      if update_channel :
-       try:
+      update_channel = CHANNEL
+	user_id = message.from_user.id
+	if update_channel :
+	  try:
               client.get_chat_member(update_channel, user_id)
-        except UserNotParticipant:
+          except UserNotParticipant:
 	  	message.reply_text("**You Must Join My Updates Channel to use ME 😎 🤭** ",parse_mode="markdown", reply_to_message_id = message.message_id, reply_markup = InlineKeyboardMarkup([ [ InlineKeyboardButton("Join My Updates Channel" ,url="https://t.me/My_Test_Botz") ]]))
 	  	return
 

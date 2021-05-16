@@ -34,7 +34,7 @@ def gyt(client,message):
       user_id = message.from_user.id
       if update_channel :
         try:
-	  	client.get_chat_member(update_channel, user_id)
+	      client.get_chat_member(update_channel, user_id)
         except UserNotParticipant:
 	      message.reply_text("**You Must Join My Updates Channel to use ME 😎 🤭** ",parse_mode="markdown", reply_to_message_id = message.message_id, reply_markup = InlineKeyboardMarkup([ [ InlineKeyboardButton("Join My Updates Channel" ,url="https://t.me/My_Test_Botz") ]]))
 	      return
